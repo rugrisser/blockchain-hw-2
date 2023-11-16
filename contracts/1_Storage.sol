@@ -8,8 +8,18 @@ pragma solidity >=0.8.2 <0.9.0;
  * @custom:dev-run-script ./scripts/deploy_with_ethers.ts
  */
 contract Storage {
-
     uint256 number;
+
+    struct VehicleLicense {
+        string vin;
+        address owner;
+        string plateNumber;
+    }
+
+    mapping (string => VehicleLicense) public vehicleLicenses;
+
+    event VehicleRegistred(string vin, address owner, string plateNumber);
+    event VehicleDeregistred(string vin);
 
     /**
      * @dev Store value in variable
@@ -20,10 +30,10 @@ contract Storage {
     }
 
     /**
-     * @dev Return value 
+     * @dev Return value
      * @return value of 'number'
      */
-    function retrieve() public view returns (uint256){
+    function retrieve() public view returns (uint256) {
         return number;
     }
 }
